@@ -158,7 +158,7 @@ public class HttpServer {
                 out.println("HTTP/1.1 200 OK");
                 out.println("Content-Type: application/json");
                 out.println();
-                System.out.println("POST /api/updateName procesado exitosamente.");
+                System.out.println("POST /App/updateName procesado exitosamente.");
 
             } catch (IOException e) {
                 out.println("HTTP/1.1 500 Internal Server Error");
