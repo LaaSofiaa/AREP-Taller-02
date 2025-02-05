@@ -7,11 +7,11 @@ import java.util.Map;
 /**
  * Clase que representa una solicitud HTTP.
  */
-class Request {
+class HttpRequest {
     private String path;
     private final Map<String, String> queryParams;
 
-    public Request(String fullPath) {
+    public HttpRequest(String fullPath) {
         this.queryParams = new HashMap<>();
         if (fullPath.contains("?")) {
             // Extrae la parte de la URL antes de los parámetros de consulta

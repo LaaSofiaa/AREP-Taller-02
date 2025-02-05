@@ -16,7 +16,7 @@ public class HttpServer {
     private static final int port = 35000;
     private static String staticFilesDirectory = "src/main/java/resources";
     private static final Map<String, String> dataStore = new HashMap<>();
-    private static final Map<String, BiFunction<Request, Response, String>> routes = new HashMap<>(); // almacenar las rutas y sus manejadores (funciones lambda)
+    private static final Map<String, BiFunction<HttpRequest, HttpResponse, String>> routes = new HashMap<>(); // almacenar las rutas y sus manejadores (funciones lambda)
 
 
     /**
@@ -84,8 +84,8 @@ public class HttpServer {
         if (routes.containsKey(basePath)){
             System.out.println("Manejando ruta dinámica: " + basePath);
 
-            Request req = new Request(path);
-            Response res = new Response(out);
+            HttpRequest req = new HttpRequest(path);
+            HttpResponse res = new HttpResponse(out);
 
             String responseBody = routes.get(basePath).apply(req, res);
 
@@ -206,11 +206,14 @@ public class HttpServer {
      * @param path    La ruta a registrar.
      * @param handler La función lambda que manejará la solicitud.
      */
-    public static void get(String path, BiFunction<Request, Response, String> handler) {
+    public static void get(String path, BiFunction<HttpRequest, HttpResponse, String> handler) {
         routes.put(path, handler);
     }
 
     public static Map<String, String> getDataStore() {
         return dataStore;
+    }
+    public static Map<String, BiFunction<HttpRequest, HttpResponse, String>> getRoutes() {
+        return routes;
     }
 }

@@ -6,10 +6,10 @@ import java.io.PrintWriter;
 /**
  * Clase que representa una respuesta HTTP.
  */
-class Response {
+class HttpResponse {
     private final PrintWriter out;
 
-    public Response(PrintWriter out) {
+    public HttpResponse(PrintWriter out) {
         this.out = out;
     }
 
