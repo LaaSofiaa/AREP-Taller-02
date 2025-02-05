@@ -137,12 +137,19 @@ public class HttpServer {
         if(path.equals("/App/updateName")) {
             System.out.println("Manejando ruta dinámica: " + path);
             try {
-                StringBuilder requestBody = new StringBuilder();
                 String line;
-
-                while ((line = in.readLine()) != null && !line.isEmpty()) {
-                    requestBody.append(line);
+                int contentLength = 0;
+                while (!(line = in.readLine()).isEmpty()) {
+                    if (line.startsWith("Content-Length:")) {
+                        contentLength = Integer.parseInt(line.split(":")[1].trim());
+                    }
                 }
+
+                // Leer el cuerpo de la solicitud
+                char[] body = new char[contentLength];
+                in.read(body, 0, contentLength);
+                String requestBody = new String(body);
+                System.out.println("Nombre actualizado: " + requestBody);
 
                 //Extrae el nuevo nombre y lo guarda
                 String name = requestBody.toString().replace("{\"name\":\"", "").replace("\"}", "");

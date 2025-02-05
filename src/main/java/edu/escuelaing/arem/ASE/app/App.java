@@ -25,14 +25,7 @@ public class App {
             // return "Hola " + name + " ,este es tu archivo JSON {\"name\": \"" + name + "\"}";
         });
 
-        HttpServer.get("/App/updateName", (request, respond) -> {
-            String name = request.getValues("name");
-            if (name != null && !name.isEmpty()) {
-                dataStore.put("name", name);
-                return "Nombre actualizado a: " + name;
-            }
-            return "Nombre no proporcionado";
-        });
+
 
         HttpServer.get("/App/pi", (req, resp) -> String.valueOf(Math.PI));
 
