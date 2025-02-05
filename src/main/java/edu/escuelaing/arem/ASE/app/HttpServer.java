@@ -18,35 +18,6 @@ public class HttpServer {
     private static final Map<String, String> dataStore = new HashMap<>();
     private static final Map<String, BiFunction<Request, Response, String>> routes = new HashMap<>(); // almacenar las rutas y sus manejadores (funciones lambda)
 
-    /**
-     * Método principal que inicia el servidor y configura las rutas.
-     */
-    public static void main(String[] args) {
-
-        // Configuración de archivos estáticos
-        staticfiles("src/main/java/resources");
-
-        // Definición de rutas y sus manejadores
-        get("/api/hello", (request, respond) -> {
-            String name = request.getValues("name"); // Obtiene el parámetro "name" de la URL
-            if (name == null || name.isEmpty()) {
-                name = "usuario";
-            }
-            return "{\"name\": \"" + name + "\"}";
-        });
-
-        get("/api/updateName", (request, respond) -> {
-            String name = request.getValues("name"); // Obtiene el parámetro "name" de la URL
-            if (name != null && !name.isEmpty()) {
-                dataStore.put("name", name);
-                return "Nombre actualizado a: " + name;
-            }
-            return "Nombre no proporcionado";
-        });
-
-        // Inicia el servidor
-        startServer();
-    }
 
     /**
      * Inicia el servidor y espera conexiones entrantes.
@@ -85,10 +56,6 @@ public class HttpServer {
                 String[] tokens = requestLine.split(" ");
                 String method = tokens[0];
                 String fileRequested = tokens[1];
-
-//                if (fileRequested.equals("/")) {
-//                    fileRequested = "/index.html";
-//                }
 
                 if (method.equals("GET")) {
                     handleGetRequest(fileRequested, dataOut, out);
@@ -167,7 +134,7 @@ public class HttpServer {
      * @param out El flujo de salida para enviar las cabeceras HTTP.
      */
     private static void handlePostRequest(BufferedReader in, String path, PrintWriter out) {
-        if(path.equals("/api/updateName")) {
+        if(path.equals("/App/updateName")) {
             System.out.println("Manejando ruta dinámica: " + path);
             try {
                 StringBuilder requestBody = new StringBuilder();
@@ -184,7 +151,6 @@ public class HttpServer {
                 out.println("HTTP/1.1 200 OK");
                 out.println("Content-Type: application/json");
                 out.println();
-                out.println("{\"message\": \"Nombre actualizado a " + name + "\"}"); // Respuesta de confirmación
                 System.out.println("POST /api/updateName procesado exitosamente.");
 
             } catch (IOException e) {
@@ -242,14 +208,6 @@ public class HttpServer {
      */
     public static void get(String path, BiFunction<Request, Response, String> handler) {
         routes.put(path, handler);
-    }
-
-    /**
-     * Define el directorio donde se encuentran los archivos estáticos.
-     * @param directory El directorio de archivos estáticos.
-     */
-    public static void staticfiles(String directory) {
-        staticFilesDirectory = directory;
     }
 
     public static Map<String, String> getDataStore() {

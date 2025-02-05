@@ -5,7 +5,7 @@ async function performGet(event) {
 
     try {
         // Solicitud GET al servidor
-        const response = await fetch(`/api/hello?name=${encodeURIComponent(name)}`);
+        const response = await fetch(`/App/hello?name=${encodeURIComponent(name)}`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -27,7 +27,7 @@ async function performPost(event) {
     event.preventDefault();
     const newName = document.getElementById('postName').value;
     try {
-        const response = await fetch('/api/updateName', {
+        const response = await fetch('/App/updateName', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -52,7 +52,24 @@ async function performPost(event) {
     }
 }
 
+// Función para obtener el valor de Pi
+async function getPi() {
+    try {
+        // Solicitud GET al servidor para obtener Pi
+        const response = await fetch('/App/pi');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const piValue = await response.text();
+
+        document.getElementById('piResponse').innerHTML = `El valor de Pi es: ${piValue}`;
+    } catch (error) {
+        console.error('Error al obtener el valor de Pi:', error);
+        document.getElementById('piResponse').innerHTML = `¡Error! No se pudo obtener el valor de Pi: ${error.message}`;
+    }
+}
+
 // Event listeners para los formularios
 document.getElementById('getForm').addEventListener('submit', performGet);
 document.getElementById('postForm').addEventListener('submit', performPost);
-
+document.getElementById('getPiButton').addEventListener('click', getPi);
