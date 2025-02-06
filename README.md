@@ -24,7 +24,7 @@ Este proyecto tiene como objetivo mejorar un servidor web existente, que actualm
 ```  
 **3.**  Ejecuta el proyecto con el siguiente comando:
 ```bash
-  java -cp target/Taller2.jar edu/escuelaing/arem/ASE/app/App.java
+  java -cp target/Taller2-1.0-SNAPSHOT.jar edu.escuelaing.arem.ASE.app.App
 ``` 
 **4.**  Una vez este corriendo la aplicación prueba los siguiente:
 
