@@ -77,7 +77,7 @@ public class HttpServer {
      * @param dataOut El flujo de salida para enviar los datos.
      * @param out El flujo de salida para enviar las cabeceras HTTP.
      */
-    private static void handleGetRequest(String path, BufferedOutputStream dataOut, PrintWriter out) {
+     static void handleGetRequest(String path, BufferedOutputStream dataOut, PrintWriter out) {
 
         String basePath = path.split("\\?")[0];
 

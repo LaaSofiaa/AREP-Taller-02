@@ -22,7 +22,9 @@ public class App {
         });
 
         get("/App/pi", (req, resp) -> String.valueOf(Math.PI));
+
         get("/App/euler", (req, resp) -> String.valueOf(Math.E));
+
         get("/App/mundo",(req,resp)-> "Hola Mundo");
         HttpServer.startServer();
     }
@@ -34,5 +36,9 @@ public class App {
      */
     public static void staticfiles(String directory) {
         staticFilesDirectory = directory;
+    }
+
+    public static String getStaticFilesDirectory() {
+        return staticFilesDirectory;
     }
 }
