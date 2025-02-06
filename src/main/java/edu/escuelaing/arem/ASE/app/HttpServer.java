@@ -16,7 +16,7 @@ public class HttpServer {
     private static final int port = 35000;
     private static String staticFilesDirectory = "src/main/java/resources";
     private static final Map<String, String> dataStore = new HashMap<>();
-    private static final Map<String, BiFunction<HttpRequest, HttpResponse, String>> routes = new HashMap<>(); // almacenar las rutas y sus manejadores (funciones lambda)
+    private static final Map<String, BiFunction<HttpRequest, HttpResponse, String>> services = new HashMap<>(); // almacenar las rutas y sus manejadores (funciones lambda)
 
 
     /**
@@ -81,13 +81,13 @@ public class HttpServer {
 
         String basePath = path.split("\\?")[0];
 
-        if (routes.containsKey(basePath)){
+        if (services.containsKey(basePath)){
             System.out.println("Manejando ruta dinámica: " + basePath);
 
             HttpRequest req = new HttpRequest(path);
             HttpResponse res = new HttpResponse(out);
 
-            String responseBody = routes.get(basePath).apply(req, res);
+            String responseBody = services.get(basePath).apply(req, res);
 
             out.println("HTTP/1.1 200 OK");
             out.println("Content-Type: application/json");
@@ -209,18 +209,28 @@ public class HttpServer {
 
     /**
      * Registra una ruta GET y su manejador.
-     *
      * @param path    La ruta a registrar.
      * @param handler La función lambda que manejará la solicitud.
      */
     public static void get(String path, BiFunction<HttpRequest, HttpResponse, String> handler) {
-        routes.put(path, handler);
+        services.put(path, handler);
     }
 
+    /**
+     * Obtiene el mapa que contiene los datos clave-valor de tipo String.
+     * @return El mapa `dataStore` con datos de tipo String.
+     */
     public static Map<String, String> getDataStore() {
         return dataStore;
     }
-    public static Map<String, BiFunction<HttpRequest, HttpResponse, String>> getRoutes() {
-        return routes;
+
+    /**
+     * Obtiene el mapa que contiene las funciones que aceptan un `HttpRequest` y un `HttpResponse`,
+     * y retornan un `String`.
+     * @return El mapa `services` con las funciones mapeadas.
+     */
+    public static Map<String, BiFunction<HttpRequest, HttpResponse, String>> getServices() {
+        return services;
     }
+
 }

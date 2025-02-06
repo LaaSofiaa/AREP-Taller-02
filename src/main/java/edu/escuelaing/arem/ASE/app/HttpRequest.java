@@ -1,57 +1,66 @@
 package edu.escuelaing.arem.ASE.app;
-import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Clase que representa una solicitud HTTP.
+ * Esta clase permite analizar la ruta y los parámetros de la consulta de una solicitud HTTP.
  */
 class HttpRequest {
-    private String path;
-    private final Map<String, String> queryParams;
+    private String path;// Almacena la ruta de la solicitud (antes del signo '?')
+    private String query; // Almacena la cadena de consulta de la solicitud (después del '?')
+    private Map<String, String> queryParams; // Mapa que contiene los parámetros de la consulta clave-valor
 
+
+    /**
+     * Constructor de la clase HttpRequest.
+     * Toma una cadena `fullPath` que representa la URL completa, con la ruta y los parámetros de la consulta.
+     * @param fullPath La URL completa de la solicitud, que puede contener ruta y parámetros de consulta.
+     */
     public HttpRequest(String fullPath) {
-        this.queryParams = new HashMap<>();
-        if (fullPath.contains("?")) {
-            // Extrae la parte de la URL antes de los parámetros de consulta
-            String[] parts = fullPath.split("\\?", 2);
-            this.path = parts[0]; // Guarda solo la ruta base
+        String[] parts = fullPath.split("\\?", 2);
+        this.path = parts[0];
+        this.query = (parts.length > 1) ? parts[1] : "";
+        this.queryParams = parseQueryParams(this.query);
+    }
 
-            if (parts.length > 1) {
-                String[] params = parts[1].split("&");
-                for (String param : params) {
-                    String[] keyValue = param.split("=", 2); // Usar "2" para asegurar que solo se divide en 2 partes
-                    if (keyValue.length > 1) {
-                        String key = URLDecoder.decode(keyValue[0], StandardCharsets.UTF_8);
-                        String value = URLDecoder.decode(keyValue[1], StandardCharsets.UTF_8);
-                        queryParams.put(key, value);
-                    } else {
-                        // Si no hay un valor después del "=", se guarda un valor vacío
-                        String key = URLDecoder.decode(keyValue[0], StandardCharsets.UTF_8);
-                        queryParams.put(key, "");
-                    }
+    /**
+     * Analiza los parámetros de la consulta en formato clave=valor.
+     * @param query La cadena de consulta de la URL (después del '?')
+     * @return Un mapa de los parámetros de la consulta donde la clave es el nombre del parámetro
+     * y el valor es el valor del parámetro.
+     */
+    private Map<String, String> parseQueryParams(String query) {
+        Map<String, String> params = new HashMap<>();
+        if (query != null && !query.isEmpty()) {
+            String[] pairs = query.split("&");
+            for (String pair : pairs) {
+                String[] keyValue = pair.split("=", 2);
+                if (keyValue.length == 2) {
+                    params.put(keyValue[0], keyValue[1]);
                 }
             }
-        } else {
-            this.path = fullPath;
         }
+        return params;
     }
 
     /**
-     * Obtiene el valor de un parámetro de consulta.
-     * @param name El nombre del parámetro.
-     * @return El valor del parámetro, o null si no existe.
-     */
-    public String getValues(String name) {
-        return queryParams.getOrDefault(name, null);
-    }
-
-    /**
-     * Obtiene la ruta base sin parámetros de consulta.
-     * @return La ruta base.
+     * Obtiene la ruta de la solicitud HTTP.
+     * @return La ruta de la solicitud.
      */
     public String getPath() {
         return path;
     }
+
+
+    /**
+     * Obtiene el valor de un parámetro de la consulta dado su nombre (clave).
+     * Si el parámetro no existe, retorna `null`.
+     * @param key El nombre del parámetro de la consulta.
+     * @return El valor del parámetro si existe, o `null` si no se encuentra.
+     */
+    public String getValues(String key) {
+        return queryParams.getOrDefault(key, null);
+    }
+
 }
