@@ -29,7 +29,7 @@ Este proyecto tiene como objetivo mejorar un servidor web existente, que actualm
 **4.**  Una vez este corriendo la aplicación prueba los siguiente:
 * **Página Principal:**
 ```bash
-  http://localhost:35000/index.html
+  http://localhost:35000/
 ```
 * **REST Services** 
 ```bash
