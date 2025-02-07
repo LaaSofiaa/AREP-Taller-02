@@ -40,7 +40,7 @@ Este proyecto tiene como objetivo mejorar un servidor web existente, que actualm
   http://localhost:35000/App/mundo
 ```
 
-* **StaicFiles**
+* **StaticFiles**
 ```bash
   http://localhost:35000/img.jpg
   http://localhost:35000/styles.css
