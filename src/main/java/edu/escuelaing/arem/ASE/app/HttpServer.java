@@ -57,6 +57,10 @@ public class HttpServer {
                 String method = tokens[0];
                 String fileRequested = tokens[1];
 
+                if (fileRequested.equals("/")) {
+                    fileRequested = "/index.html";
+                }
+
                 if (method.equals("GET")) {
                     handleGetRequest(fileRequested, dataOut, out);
                 } else if (method.equals("POST")) {
