@@ -14,7 +14,7 @@ Este proyecto tiene como objetivo mejorar un servidor web existente, que actualm
 **1.**  Clonar el repositorio
 
 ```bash
-  git clone https://github.com/tu_usuario/AREP-Taller-02.git
+  git clone https://github.com/LaaSofiaa/AREP-Taller-02.git
 
   cd AREP-Taller-02
 ```
@@ -27,6 +27,7 @@ Este proyecto tiene como objetivo mejorar un servidor web existente, que actualm
   java -cp target/Taller2-1.0-SNAPSHOT.jar edu.escuelaing.arem.ASE.app.App
 ``` 
 **4.**  Una vez este corriendo la aplicación prueba los siguiente:
+
 * **Página Principal:**
 ```bash
   http://localhost:35000/
@@ -49,7 +50,7 @@ Este proyecto tiene como objetivo mejorar un servidor web existente, que actualm
 ```
 
 ## Arquitectura del Proyecto 
-**Estructura del directorio**
+### **Estructura del directorio**
 
 El directorio del proyecto esta organizado de la siguiente manera:
 
@@ -74,12 +75,12 @@ El directorio del proyecto esta organizado de la siguiente manera:
  ┃ ┃ ┃ ┗ 📜 AppTest.java  
 ```
 
-**Diagrama de la Arquitectura**
+### **Diagrama de la Arquitectura**
 
 ![image](https://github.com/user-attachments/assets/655820bf-2900-4099-9fcd-db6131250603)
 ![image](https://github.com/user-attachments/assets/4b0251a3-24fa-4a54-9109-456630f684d7)
 
-**Componentes del Proyecto**
+### **Componentes del Proyecto**
 
  `App.java`
 - Contiene el método principal `main` que inicia el servidor.
@@ -104,15 +105,19 @@ El directorio del proyecto esta organizado de la siguiente manera:
 - **GET REQUESTS:**
   
   - **Saludo Personalizado:** Accede a la URL /App/hello con y sin parámetros de consulta para verificar la funcionalidad del saludo.  Si no se le asigan parámetros deja por defecto el nombre usuario. Ejemplo: http://localhost:35000/App/hello?name=sofi.
+    
   ![image](https://github.com/user-attachments/assets/65f5c856-447e-4e14-998e-f02f0c51b572)
 
   - **Saludo Hola Mundo:** Accede a la URL /App/mundo para comprobar que el servidor devuelve correctamente el Hola Mundo.
+    
   ![image](https://github.com/user-attachments/assets/bb089175-4d22-4806-84ac-acbb7f8f1b4b)
 
   - **Valor de Pi:** Accede a la URL /App/pi para comprobar que el servidor devuelve correctamente el valor de pi.
+    
   ![image](https://github.com/user-attachments/assets/c3e66c8e-8f15-4c9e-a03b-45484c5538d5)
 
    - **Valor de Euler:** Accede a la URL /App/euler para comprobar que el servidor devuelve correctamente el valor de euler.
+     
    ![image](https://github.com/user-attachments/assets/bacd8128-5c44-4575-9293-cd22a1708ab9)
   
 - **STATIC FILES:**
