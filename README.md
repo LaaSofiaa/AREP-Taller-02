@@ -8,6 +8,18 @@ Este proyecto tiene como objetivo mejorar un servidor web existente, que actualm
 - Extracción de Parámetros de Consulta: Obtener parámetros de las solicitudes para personalizar respuestas.
 - Archivos Estáticos: Especificar la carpeta donde se encuentran los archivos estático
 
+## Tabla de Contenido
+
+1. [Introducción](#web-framework-development-for-rest-services-and-static-file-management)  
+2. [Instalación](#instalación)  
+3. [Arquitectura del Proyecto](#arquitectura-del-proyecto)  
+   - [Estructura del Directorio](#estructura-del-directorio)  
+   - [Diagrama de la Arquitectura](#diagrama-de-la-arquitectura)  
+   - [Componentes del Proyecto](#componentes-del-proyecto)  
+4. [Pruebas de Usuario](#pruebas-de-usuario)   
+5. [Pruebas Automatizadas](#pruebas-automatizadas)  
+6. [Autor](#autor)
+
   
 ## Instalación
 
@@ -102,7 +114,7 @@ El directorio del proyecto esta organizado de la siguiente manera:
 
 ## Pruebas de Usuario
 
-- **GET REQUESTS:**
+### - **GET REQUESTS:**
   
   - **Saludo Personalizado:** Accede a la URL /App/hello con y sin parámetros de consulta para verificar la funcionalidad del saludo.  Si no se le asigan parámetros deja por defecto el nombre usuario. Ejemplo: http://localhost:35000/App/hello?name=sofi.
     
@@ -120,7 +132,7 @@ El directorio del proyecto esta organizado de la siguiente manera:
      
    ![image](https://github.com/user-attachments/assets/bacd8128-5c44-4575-9293-cd22a1708ab9)
   
-- **STATIC FILES:**
+### - **STATIC FILES:**
   - **Index.html:**  Comprueba que el archivo index.html se cargue correctamente desde el directorio de recursos.
      ![image](https://github.com/user-attachments/assets/ee84c1ae-1975-4c06-9599-4309ebcb2b47)
      ![image](https://github.com/user-attachments/assets/fc612b44-62cb-4d7d-879d-c49d3dbf9a9f)
